@@ -1,16 +1,49 @@
 * { box-sizing: border-box; }
 
+/* Colors live in variables so dark mode only has to swap these */
+:root {
+  --page-bg: #f3f4f6;
+  --card-bg: white;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --line: #e5e7eb;
+}
+
+:root[data-theme="dark"] {
+  --page-bg: #111827;
+  --card-bg: #1f2937;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --border: #4b5563;
+  --line: #374151;
+}
+
 body {
   font-family: system-ui, sans-serif;
-  background: #f3f4f6;
+  background: var(--page-bg);
+  color: var(--text);
   margin: 0;
   padding: 40px 16px;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#theme-toggle {
+  background: transparent;
+  font-size: 22px;
+  padding: 4px 8px;
+}
+#theme-toggle:hover { background: var(--line); }
+
 main {
   max-width: 480px;
   margin: 0 auto;
-  background: white;
+  background: var(--card-bg);
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
@@ -22,10 +55,13 @@ h1 { margin-top: 0; }
 
 #task-input {
   flex: 1;
+  min-width: 0; /* lets the input shrink so the Add button never gets pushed off-screen */
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text);
 }
 
 button {
@@ -46,7 +82,7 @@ li {
   align-items: center;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--line);
 }
 
 li span { flex: 1; }
@@ -59,4 +95,4 @@ li button.delete {
 }
 li button.delete:hover { background: #dc2626; }
 
-#empty-message { color: #6b7280; text-align: center; }
+#empty-message { color: var(--muted); text-align: center; }
